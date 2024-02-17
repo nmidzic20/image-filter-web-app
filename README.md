@@ -12,8 +12,13 @@ In addition to web frameworks specifically written for server-side development i
 
 # Installation
 
+Prerequisite: 
+- installed CMake
+- installed OpenCV
+- Windows: add Environment Variables for `opencv` directory, CMake `bin` directory and CMake `lib` directory
+
 In Visual Studio Code:
-- install extensions C/C++, C/C++ Compile Run, Cmake, Cmake Tools
+- install extensions C/C++, C/C++ Compile Run, CMake, CMake Tools
 - build Cmake (option Build, compiler Visual Studio Release Community x86_amd64)
 - run `npm install` in root folder
 - run `node server.js` in root folder and go to `http:\\localhost:3000`
