@@ -8,6 +8,12 @@ In addition to web frameworks specifically written for server-side development i
 
 # Demo
 
-![web app demo](./demo.png)
+![web app demo](./image-filter-demo.gif)
 
 # Installation
+
+In Visual Studio Code:
+- install extensions C/C++, C/C++ Compile Run, Cmake, Cmake Tools
+- build Cmake (option Build, compiler Visual Studio Release Community x86_amd64)
+- run `npm install` in root folder
+- run `node server.js` in root folder and go to `http:\\localhost:3000`
