@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenCVPrimjer</title>
+    <style>
+      #imageContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+
+      #imageContainer img {
+        max-height: 300px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Učitaj i prikaži sliku</h1>
+    <input
+      type="file"
+      id="imageUpload"
+      accept="image/*"
+      onchange="displayImage()"
+    />
+    <button onclick="uploadAndProcess('grayscale')">Grayscale</button>
+    <button onclick="uploadAndProcess('blur')">Gaussian Blur</button>
+    <button onclick="uploadAndProcess('canny')">Canny Edge Detection</button>
+    <div id="imageContainer"></div>
+
+    <script>
+      function displayImage() {
+        const imageUpload = document.getElementById("imageUpload");
+        const imageFile = imageUpload.files[0];
+
+        const imageUrl = URL.createObjectURL(imageFile);
+
+        const img = document.createElement("img");
+        img.src = imageUrl;
+
+        const imageContainer = document.getElementById("imageContainer");
+        imageContainer.innerHTML = "";
+        imageContainer.appendChild(img);
+      }
+
+      function uploadAndProcess(filter) {
+        const imageUpload = document.getElementById("imageUpload");
+        const imageFile = imageUpload.files[0];
+
+        const formData = new FormData();
+        formData.append("image", imageFile);
+        formData.append("filter", filter);
+
+        fetch("/process", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.blob())
+          .then((blob) => {
+            const imageUrl = URL.createObjectURL(blob);
+
+            const img = document.createElement("img");
+            img.src = imageUrl;
+
+            const imageContainer = document.getElementById("imageContainer");
+            imageContainer.appendChild(img);
+          })
+          .catch((error) => {
+            console.error("Error processing image:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
